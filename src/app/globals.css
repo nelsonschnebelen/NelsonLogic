@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 248, 250, 252;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: #030303;
+  overflow-x: hidden;
+}
+
+/* Nelson Logic: gradient text animation */
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient {
+  animation: gradient 6s ease infinite;
+}
+
+/* Crave dashboard */
+:root {
+  --crave-yellow: #ffd700;
+  --crave-black: #050505;
+  --crave-panel: rgba(20, 20, 20, 0.6);
+  --crave-border: rgba(255, 215, 0, 0.15);
+}
+
+.crave-page {
+  background-color: var(--crave-black);
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.02) 0%, transparent 20%);
+}
+
+.crave-dashboard-container {
+  width: 900px;
+  height: 550px;
+  background: var(--crave-panel);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--crave-border);
+  border-radius: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: crave-bootUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.crave-loader-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: var(--crave-yellow);
+  width: 0%;
+  animation: crave-load 2s ease-out forwards;
+}
+
+@keyframes crave-bootUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes crave-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(255, 215, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+}
+
+@keyframes crave-load {
+  0% { width: 0%; opacity: 1; }
+  100% { width: 100%; opacity: 0; }
+}
+
+.crave-pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--crave-yellow);
+  border-radius: 50%;
+  animation: crave-pulse 2s infinite;
+}
